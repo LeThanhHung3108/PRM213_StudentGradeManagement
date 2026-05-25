@@ -14,6 +14,9 @@ public class UnitOfWork : IUnitOfWork
         _context = context;
     }
 
+    public IImportedGradeRecordRepository GradeRecords =>
+        _importedGradeRecords ??= new ImportedGradeRecordRepository(_context);
+
     public IImportedGradeRecordRepository ImportedGradeRecords =>
         _importedGradeRecords ??= new ImportedGradeRecordRepository(_context);
 
