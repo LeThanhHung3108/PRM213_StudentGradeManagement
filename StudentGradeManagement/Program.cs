@@ -1,3 +1,4 @@
+using BusinessLayer;
 using DataAccessLayer;
 using Microsoft.OpenApi.Models;
 
@@ -49,6 +50,7 @@ builder.Services.AddSwaggerGen(option =>
 });
 
 
+builder.Services.AddBusinessLayer();
 builder.Services.AddDataAccessLayer(builder.Configuration);
 
 
