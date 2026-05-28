@@ -1,6 +1,5 @@
+﻿
 using DataAccessLayer.Context;
-using DataAccessLayer.IRepository;
-using DataAccessLayer.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,13 +12,8 @@ public static class DependencyInjection
         this IServiceCollection services,
         IConfiguration configuration)
     {
-        services.AddDbContext<ApplicationDbContext>(options =>
+        services.AddDbContext<AppDbContext>(options =>
             options.UseNpgsql(configuration.GetConnectionString("MyDB")));
-
-        services.AddScoped<IUnitOfWork, UnitOfWork>();
-        services.AddScoped<IImportedGradeRecordRepository, ImportedGradeRecordRepository>();
-        services.AddScoped<IImportHistoryRepository, ImportHistoryRepository>();
-
         return services;
     }
 }

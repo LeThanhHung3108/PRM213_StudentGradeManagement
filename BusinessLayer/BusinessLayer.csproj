@@ -10,4 +10,10 @@
     <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DTOs\" />
+    <Folder Include="Iservice\" />
+    <Folder Include="Service\" />
+  </ItemGroup>
+
 </Project>
