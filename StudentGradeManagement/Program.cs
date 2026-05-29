@@ -1,6 +1,8 @@
 using BusinessLayer;
 using DataAccessLayer;
 using Microsoft.OpenApi.Models;
+using OfficeOpenXml;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCors(options =>
@@ -19,8 +21,15 @@ builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(option =>
-{
+{   
     option.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
+
+    var xmlFilename =
+      $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+
+    option.IncludeXmlComments(
+        Path.Combine(AppContext.BaseDirectory, xmlFilename));
+
     option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         In = ParameterLocation.Header,
@@ -46,6 +55,7 @@ builder.Services.AddSwaggerGen(option =>
     });
 });
 
+ExcelPackage.License.SetNonCommercialOrganization("StudentGradeManagement");
 
 builder.Services.AddBusinessLayer();
 builder.Services.AddDataAccessLayer(builder.Configuration);

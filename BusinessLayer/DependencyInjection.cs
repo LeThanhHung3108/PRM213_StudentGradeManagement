@@ -1,4 +1,6 @@
 
+using BusinessLayer.IService;
+using BusinessLayer.Service;
 using DataAccessLayer.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -13,7 +15,9 @@ public static class DependencyInjection
     {
         services.AddMemoryCache();
 
-        // services.AddScoped<IStudentService, StudentService>();
+        services.AddScoped<IImportService, ImportService>();
+        services.AddScoped<ISubjectClassService, SubjectClassService>();
+        services.AddScoped<IStatisticsService, StatisticsService>();
 
         return services;
     }

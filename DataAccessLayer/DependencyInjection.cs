@@ -1,5 +1,7 @@
 ﻿
 using DataAccessLayer.Context;
+using DataAccessLayer.IRepository;
+using DataAccessLayer.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,6 +16,11 @@ public static class DependencyInjection
     {
         services.AddDbContext<AppDbContext>(options =>
             options.UseNpgsql(configuration.GetConnectionString("MyDB")));
+
+        services.AddScoped<IImportRepository, ImportRepository>();
+        services.AddScoped<ISubjectClassRepository, SubjectClassRepository>();
+        services.AddScoped<IStatisticsRepository, StatisticsRepository>();
+
         return services;
     }
 }
